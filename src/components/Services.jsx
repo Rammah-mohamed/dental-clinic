@@ -149,36 +149,6 @@ export default function Services() {
         </svg>
       ),
     },
-    {
-      title: "علاج اللثة",
-      description: "علاج التهاب اللثة بلا ألم وبأحدث الأجهزة الطبية",
-      icon: (
-        <svg
-          width="48"
-          height="48"
-          viewBox="0 0 48 48"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M 12 28 Q 12 20 18 16 L 18 24 M 24 14 L 24 24 M 30 16 Q 36 20 36 28"
-            fill="none"
-            stroke="#0A4D68"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M 10 32 Q 10 28 15 24 Q 20 28 24 27 Q 28 28 33 24 Q 38 28 38 32 Q 38 38 24 42 Q 10 38 10 32 Z"
-            fill="none"
-            stroke="#0A4D68"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
   ];
 
   return (
@@ -193,7 +163,7 @@ export default function Services() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}

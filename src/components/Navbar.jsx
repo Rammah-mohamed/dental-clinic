@@ -1,15 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setHasScroll(window.scrollY > 0);
+      setHasScroll(window.scrollY > 80);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,7 +49,7 @@ export default function Navbar() {
           }
         });
       },
-      { threshold: 0.3, rootMargin: "-100px 0px -50% 0px" }
+      { threshold: 0.3, rootMargin: "-100px 0px -50% 0px" },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -135,7 +158,10 @@ export default function Navbar() {
         </div>
 
         {isOpen && (
-          <div className="md:hidden bg-white shadow-lg py-4 px-6 flex flex-col gap-4 border-t border-gray-100">
+          <div
+            ref={menuRef}
+            className="md:hidden bg-white shadow-lg py-4 px-6 flex flex-col gap-4 border-t border-gray-100"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
